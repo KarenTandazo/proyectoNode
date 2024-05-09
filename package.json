@@ -1,7 +1,7 @@
 {
   "name": "proyectonode",
   "version": "1.0.0",
-  "description": "Proyecto Node - Karen Nicole tandazo Reyes - karen_tandazo22@hotmail.com",
+  "description": "Proyecto Node - Karen Nicole Tandazo Reyes - karen_tandazo22@hotmail.com",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

@@ -11,8 +11,8 @@ var controller = {
         
         for (let i = 1; i <= 100; i++) {
             const resultado = calculoCubo(i);
-            console.log("El cubo de "+ i + "es:", resultado);
-            cubos.push("El cubo de "+ i + "es:", resultado)
+            console.log("El cubo de "+ i + " es:", resultado);
+            cubos.push("El cubo de "+ i + " es:", resultado)
         }
         
         return res.status(200).send({

@@ -2,11 +2,20 @@
 
 module.exports = async (job, done) => {
     try{
-        job.progress(99);
 
-        console.log("Hola mundo desde el job");
+        job.progress(0);
 
-        return done(null,{"message":"Job ejecutado correctamente"})
+        let numeros =  job.data
+
+        console.log(numeros);
+
+        setTimeout(() => {
+            console.log("Han pasado 20 seg");
+            job.progress(100);
+            numeros.message = "Job ejecutado correctamente";
+            return done(null,numeros);
+        }, 10000);
+
     }catch(error){
         return done(error);
     }

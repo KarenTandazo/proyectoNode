@@ -27,7 +27,7 @@ api.post('/login',[
 //Logout
 api.post('/logout', middleware.userProtectUrl, AuthController.logout_user);
 
-//API-USUARIOS CRUD
+//CRUD - USUARIOS
 api.post('/user', middleware.userProtectUrl, [
     body("iduser").not().isEmpty(),
     body("nombre").not().isEmpty(),

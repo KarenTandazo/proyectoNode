@@ -22,7 +22,7 @@ var middleware = {
                         if(!session){
                             return res.status(401).send({
                                 status: 401,
-                                message: "Sesión activa no encontrada/ Sesión cerrada",
+                                message: "Sesión activa no encontrada/ Sesión no activa",
                             });
                         }
                         next();
