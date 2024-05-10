@@ -4,6 +4,7 @@ const { validationResult } = require('express-validator');
 const bcrypt = require('bcrypt');
 
 var UsersModel = require('../models/users');
+const { usersJob } = require('../workers/queues')
 
 var controller = {
     userList: function(req, res){
@@ -59,61 +60,11 @@ var controller = {
 
         var data = req.body;
 
-        //USUARIO EXISTENTE?
-        UsersModel.findOne({iduser:data.iduser})
-        .then(usuarios => {
-            //Validación de usuario duplicado
-            console.log(usuarios)
-            if(usuarios){
-                return res.status(400).send({
-                    status: 400,
-                    message: "Usuario ya existente",
-                });
-            }
-            
-            //Crypt de password
-            const saltRounds = 10;
-            bcrypt.genSalt(saltRounds, function(err, salt) {
-                bcrypt.hash(data.password, salt, function(err, hash) {
-                    var createUser = new UsersModel();
-                    createUser.iduser = data.iduser;
-                    createUser.nombre = data.nombre;
-                    createUser.edad = data.edad;
-                    createUser.email = data.email;
-                    createUser.password = hash;
+        usersJob.add(data);
 
-                    createUser.save()
-                    .then(resultado => {
-                        var respuestaEspecifica = {
-                            "iduser": resultado.iduser,
-                            "nombre": resultado.nombre,
-                            "edad": resultado.edad,
-                            "email": resultado.email,
-                            "password": resultado.password
-                        }
-                        return res.status(200).send({
-                            status: 200,
-                            message: "Usuario almacenado",
-                            data: respuestaEspecifica
-                        });
-                    })
-                    .catch(error => {
-                        console.error(error);
-                        return res.status(500).send({
-                            status: 500,
-                            message: "Error detectado",
-                        });
-                    });
-                });
-            });
-        
-        })
-        .catch(error => {
-            console.error(error);
-            return res.status(500).send({
-                status: 500,
-                message: "Error detectado",
-            });
+        return res.status(200).send({
+            status: 200,
+            message: "Usuario recibido"
         });
     },
 

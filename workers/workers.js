@@ -1,6 +1,7 @@
 'use strict'
 
 module.exports = {
-    primerJob: require("./primerJob")
+    primerJob: require("./primerJob"),
+    usersJob: require("./usersJob"),
 };
 

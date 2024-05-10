@@ -2,7 +2,7 @@
   "name": "proyectonode",
   "version": "1.0.0",
   "description": "Proyecto Node - Karen Nicole Tandazo Reyes - karen_tandazo22@hotmail.com",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
